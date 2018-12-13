@@ -1,0 +1,67 @@
+﻿@model Web.Models.UserModels.RegisterModel
+
+@{
+                /**/
+
+                ViewBag.Title = "Register";
+}
+
+<h2>Регистрация</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div>
+    <h4>Регистрация пользователя</h4>
+    <hr />
+    @Html.ValidationSummary(false)
+
+    <div>
+        Электронный адрес
+        <div>
+            @Html.EditorFor(model => model.Email)
+        </div>
+    </div>
+
+    <div>
+        Дата рождения
+        <div>
+            @Html.EditorFor(model => model.DateOfCreating)
+        </div>
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Gender)
+        <div>
+            @Html.RadioButtonFor(m => m.Gender, "женский")
+            <span>женский</span>
+        </div>
+        <div>
+            @Html.RadioButtonFor(m => m.Gender, "мужской")
+            <span>мужской</span>
+        </div>
+    </div>
+
+    <div>
+        Пароль
+        <div>
+            @Html.EditorFor(model => model.Password)
+        </div>
+    </div>
+
+    <div>
+        Подтвердить пароль
+        <div>
+            @Html.EditorFor(model => model.PasswordConfirm)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            <input type="submit" value="Зарегистрировать" />
+        </div>
+    </div>
+</div>
+}
