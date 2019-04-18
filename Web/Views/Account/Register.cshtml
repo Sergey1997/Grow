@@ -1,67 +1,70 @@
 ﻿@model Web.Models.UserModels.RegisterModel
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Register";
+    ViewBag.Title = "Register";
 }
 
-<h2>Регистрация</h2>
+<div class="container">
 
+    <form class="well form-horizontal" action=" " method="post">
+        @Html.AntiForgeryToken()
+        <fieldset>
+            @Html.ValidationSummary(false)
+            <!-- Form Name -->
+            <legend><center><h2><b>Registration Form</b></h2></center></legend><br>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">E-Mail</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
 
-<div>
-    <h4>Регистрация пользователя</h4>
-    <hr />
-    @Html.ValidationSummary(false)
+            <!-- Text input-->
 
-    <div>
-        Электронный адрес
-        <div>
-            @Html.EditorFor(model => model.Email)
-        </div>
-    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Password</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
 
-    <div>
-        Дата рождения
-        <div>
-            @Html.EditorFor(model => model.DateOfCreating)
-        </div>
-    </div>
+            <!-- Text input-->
 
-    <div>
-        @Html.LabelFor(m => m.Gender)
-        <div>
-            @Html.RadioButtonFor(m => m.Gender, "женский")
-            <span>женский</span>
-        </div>
-        <div>
-            @Html.RadioButtonFor(m => m.Gender, "мужской")
-            <span>мужской</span>
-        </div>
-    </div>
-
-    <div>
-        Пароль
-        <div>
-            @Html.EditorFor(model => model.Password)
-        </div>
-    </div>
-
-    <div>
-        Подтвердить пароль
-        <div>
-            @Html.EditorFor(model => model.PasswordConfirm)
-        </div>
-    </div>
-
-    <div>
-        <div>
-            <input type="submit" value="Зарегистрировать" />
-        </div>
-    </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Confirm Password</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.PasswordConfirm, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+            <!-- Button -->
+            <div class="row">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-2">
+                    <br>
+                    <button class = "btn btn-warning">
+                        @Html.ActionLink("Go back", "Index", "Home")
+                    </button> 
+                </div>
+                <div class="col-md-offset-6">
+                    <br><button type="submit" class="btn btn-success">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>
-}
+</div><!-- /.container -->

@@ -17,11 +17,10 @@ namespace Web.Models.UserModels
         {
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             userIdentity.AddClaim(new Claim(ClaimTypes.DateOfBirth, DateOfCreation.ToString()));
-            userIdentity.AddClaim(new Claim(ClaimTypes.Gender, this.Gender));
+
             return userIdentity;
         }
-        public DateTime? DateOfCreation { get; set; }
-        public string Gender { get; set; }
+        public DateTime? DateOfCreation { get; set; } = DateTime.Now;
         public virtual ICollection<Goal> Goals { get; set; }
         public virtual ICollection<Skill> Skills { get; set; }
         public User()

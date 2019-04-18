@@ -10,6 +10,9 @@
     @Html.ValidationSummary(true, "")
     <p>Название:  @Html.EditorFor(model => model.Name)</p>
     <p>Описание: @Html.EditorFor(model => model.Description)</p>
-    <p><input type="submit" value="Добавить" /></p>
+    <button class="btn btn-success" value="Добавить">
+        <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+        Добавить
+    </button>
 </div>
 }

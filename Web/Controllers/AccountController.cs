@@ -10,12 +10,25 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Web.Models;
+using Web.Models.GoalModels;
 using Web.Models.UserModels;
 
 namespace Web.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly ApplicationContext _context = new ApplicationContext();
+
+        public AccountController()
+        {
+
+        }
+
+        public AccountController(ApplicationContext context)
+        {
+            _context = context;
+        }
+
         private ApplicationUserManager UserManager
         {
             get
@@ -48,27 +61,27 @@ namespace Web.Controllers
                 }
                 //AddErrors(result);
             }
-
+            
             return View(model);
         }
-        [Authorize]
-        public ActionResult Index()
+
+        [AllowAnonymous]
+        public IEnumerable<Goal> Index(string userEmail)
         {
-            IList<string> roles = new List<string> { "Роль не определена" };
-            ApplicationUserManager userManager = HttpContext.GetOwinContext()
-                                                    .GetUserManager<ApplicationUserManager>();
-            User user = userManager.FindByEmail(User.Identity.Name);
-            if (user != null)
-                roles = userManager.GetRoles(user.Id);
-            return View(roles);
+            var user = _context.Users.First(u => u.Email == userEmail);
+
+            var goalsofUser = user.Goals.ToList();
+
+            return goalsofUser;
         }
+
         public string GetInfo()
         {
             var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
             var email = HttpContext.User.Identity.Name;
             var user = UserManager.Users.Where(p => p.Email == email).SingleOrDefault();
             var dateOfCreating = UserManager.Users.Where(p => p.Email == email).Select(s => s.DateOfCreation);
-            return "<p>Эл. адрес: " + email + "</p><p>Пол:" + user.Gender + "</p><p> Дата создания:" + user.DateOfCreation + "</p>";
+            return "<p>Эл. адрес: " + email + "</p><p> Дата создания:" + user.DateOfCreation + "</p>";
         }
         private IAuthenticationManager AuthenticationManager
         {

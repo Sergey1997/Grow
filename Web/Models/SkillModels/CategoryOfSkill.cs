@@ -11,5 +11,6 @@ namespace Web.Models.SkillModels
         [Key]
         public int CategoryId { get; set; }
         public string Description { get; set; }
+        public virtual ICollection<Skill> Skills { get; set; }
     }
 }

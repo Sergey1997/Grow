@@ -1,29 +1,60 @@
 ﻿@model Web.Models.UserModels.LoginModel
 
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "Login";
+    ViewBag.Title = "Login";
 }
 
-<h2>Вход на сайт</h2>
+<div class="container">
+
+    <form class="well form-horizontal" action=" " method="post">
+        @Html.AntiForgeryToken()
+        <fieldset>
+            @Html.ValidationSummary(false)
+            <!-- Form Name -->
+            <legend><center><h2><b>Log in</b></h2></center></legend><br>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">E-Mail</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Password</label>
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div>
-        @Html.ValidationSummary()
-        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-        <p>
-            <label>Email</label><br />
-            @Html.EditorFor(x => x.Email)
-        </p>
-        <p>
-            <label>Пароль</label><br />
-            @Html.EditorFor(x => x.Password)
-        </p>
-        <p><button type="submit">Войти</button></p>
-    </div>
-}
+            <!-- Button -->
+            <div class="row">
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-2">
+                    <br>
+                    <button class="btn btn-warning">
+                        @Html.ActionLink("Go back", "Index", "Home")
+                    </button>
+                </div>
+                <div class="col-md-offset-6">
+                    <br><button type="submit" class="btn btn-success">
+                        Log in
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+</div><!-- /.container -->

@@ -17,22 +17,18 @@ namespace Web.Migrations
                 .PrimaryKey(t => t.CategoryId);
             
             CreateTable(
-                "dbo.Goals",
+                "dbo.Skills",
                 c => new
                     {
-                        GoalId = c.Int(nullable: false, identity: true),
-                        StatusOfGoal = c.Int(nullable: false),
-                        IsCompleted = c.Boolean(nullable: false),
-                        StartDate = c.DateTime(nullable: false),
-                        FinishDate = c.DateTime(nullable: false),
-                        DeadlineDate = c.DateTime(nullable: false),
-                        IsFinished = c.Boolean(nullable: false),
-                        UserId = c.Int(nullable: false),
-                        User_Id = c.String(maxLength: 128),
+                        SkillId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Description = c.String(),
+                        CategoryId = c.Int(nullable: false),
+                        LevelOfSkill = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.GoalId)
-                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
-                .Index(t => t.User_Id);
+                .PrimaryKey(t => t.SkillId)
+                .ForeignKey("dbo.CategoryOfSkills", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.CategoryId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -71,6 +67,23 @@ namespace Web.Migrations
                 .Index(t => t.UserId);
             
             CreateTable(
+                "dbo.Goals",
+                c => new
+                    {
+                        GoalId = c.Int(nullable: false, identity: true),
+                        StatusOfGoal = c.Int(nullable: false),
+                        IsCompleted = c.Boolean(nullable: false),
+                        StartDate = c.DateTime(nullable: false),
+                        FinishDate = c.DateTime(nullable: false),
+                        DeadlineDate = c.DateTime(nullable: false),
+                        UserId = c.Int(nullable: false),
+                        User_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.GoalId)
+                .ForeignKey("dbo.AspNetUsers", t => t.User_Id)
+                .Index(t => t.User_Id);
+            
+            CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
                     {
@@ -100,20 +113,6 @@ namespace Web.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.Skills",
-                c => new
-                    {
-                        SkillId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
-                        CategoryId = c.Int(nullable: false),
-                        LevelOfSkill = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.SkillId)
-                .ForeignKey("dbo.CategoryOfSkills", t => t.CategoryId, cascadeDelete: true)
-                .Index(t => t.CategoryId);
-            
-            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -126,48 +125,48 @@ namespace Web.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
-                "dbo.SkillUsers",
+                "dbo.UserSkills",
                 c => new
                     {
-                        Skill_SkillId = c.Int(nullable: false),
                         User_Id = c.String(nullable: false, maxLength: 128),
+                        Skill_SkillId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Skill_SkillId, t.User_Id })
-                .ForeignKey("dbo.Skills", t => t.Skill_SkillId, cascadeDelete: true)
+                .PrimaryKey(t => new { t.User_Id, t.Skill_SkillId })
                 .ForeignKey("dbo.AspNetUsers", t => t.User_Id, cascadeDelete: true)
-                .Index(t => t.Skill_SkillId)
-                .Index(t => t.User_Id);
+                .ForeignKey("dbo.Skills", t => t.Skill_SkillId, cascadeDelete: true)
+                .Index(t => t.User_Id)
+                .Index(t => t.Skill_SkillId);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.SkillUsers", "User_Id", "dbo.AspNetUsers");
-            DropForeignKey("dbo.SkillUsers", "Skill_SkillId", "dbo.Skills");
-            DropForeignKey("dbo.Skills", "CategoryId", "dbo.CategoryOfSkills");
+            DropForeignKey("dbo.UserSkills", "Skill_SkillId", "dbo.Skills");
+            DropForeignKey("dbo.UserSkills", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Goals", "User_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropIndex("dbo.SkillUsers", new[] { "User_Id" });
-            DropIndex("dbo.SkillUsers", new[] { "Skill_SkillId" });
+            DropForeignKey("dbo.Skills", "CategoryId", "dbo.CategoryOfSkills");
+            DropIndex("dbo.UserSkills", new[] { "Skill_SkillId" });
+            DropIndex("dbo.UserSkills", new[] { "User_Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Skills", new[] { "CategoryId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
+            DropIndex("dbo.Goals", new[] { "User_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Goals", new[] { "User_Id" });
-            DropTable("dbo.SkillUsers");
+            DropIndex("dbo.Skills", new[] { "CategoryId" });
+            DropTable("dbo.UserSkills");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Skills");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
+            DropTable("dbo.Goals");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.Goals");
+            DropTable("dbo.Skills");
             DropTable("dbo.CategoryOfSkills");
         }
     }

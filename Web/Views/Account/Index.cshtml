@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Web.Models.GoalModels.Goal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            @Html.DisplayForModel(Model.First().Description)
+        </tr>
+        <tr>
+            @Html.DisplayForModel(Model.First().StartDate)
+        </tr>
+        <tr>
+            @Html.DisplayForModel(Model.First().DeadlineDate)
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayName(item.Description)
+                </th>
+                <th>
+                    @Html.DisplayName(item.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayName(item.DeadlineDate)
+                </th>
+            </tr>
+        }
+    </tbody>
+
+</table>

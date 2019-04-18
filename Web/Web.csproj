@@ -186,9 +186,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812191804342_Initial.cs" />
-    <Compile Include="Migrations\201812191804342_Initial.Designer.cs">
-      <DependentUpon>201812191804342_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201904181949547_Initial.cs" />
+    <Compile Include="Migrations\201904181949547_Initial.Designer.cs">
+      <DependentUpon>201904181949547_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904182047559_deleteUnnecessaryFields.cs" />
+    <Compile Include="Migrations\201904182047559_deleteUnnecessaryFields.Designer.cs">
+      <DependentUpon>201904182047559_deleteUnnecessaryFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904182131453_AddDescription.cs" />
+    <Compile Include="Migrations\201904182131453_AddDescription.Designer.cs">
+      <DependentUpon>201904182131453_AddDescription.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
@@ -212,6 +220,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <None Include="Views\Roles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -276,8 +285,14 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812191804342_Initial.resx">
-      <DependentUpon>201812191804342_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201904181949547_Initial.resx">
+      <DependentUpon>201904181949547_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904182047559_deleteUnnecessaryFields.resx">
+      <DependentUpon>201904182047559_deleteUnnecessaryFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904182131453_AddDescription.resx">
+      <DependentUpon>201904182131453_AddDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
