@@ -6,10 +6,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Web.Models;
 using Web.Models.RoleModels;
 
 public class RolesController : Controller
 {
+    private readonly ApplicationContext _context = new ApplicationContext();
+
+    public RolesController()
+    {
+    }
+
+    public RolesController(ApplicationContext context)
+    {
+        _context = context;
+    }
+
     private ApplicationRoleManager RoleManager
     {
         get
@@ -49,38 +61,41 @@ public class RolesController : Controller
         return View(model);
     }
 
-    public async Task<ActionResult> Edit(string id)
-    {
-        ApplicationRole role = await RoleManager.FindByIdAsync(id);
-        if (role != null)
-        {
-            return View(new EditRoleModel { Id = role.Id, Name = role.Name, Description = role.Description });
-        }
-        return RedirectToAction("Index");
-    }
-    [HttpPost]
-    public async Task<ActionResult> Edit(EditRoleModel model)
-    {
-        if (ModelState.IsValid)
-        {
-            ApplicationRole role = await RoleManager.FindByIdAsync(model.Id);
-            if (role != null)
-            {
-                role.Description = model.Description;
-                role.Name = model.Name;
-                IdentityResult result = await RoleManager.UpdateAsync(role);
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Что-то пошло не так");
-                }
-            }
-        }
-        return View(model);
-    }
+    //public async Task<ActionResult> Edit(string id)
+    //{
+    //    ApplicationRole role = await RoleManager.FindByIdAsync(id);
+    //    if (role != null)
+    //    {
+    //        return View(new EditRoleModel { Id = role.Id, Name = role.Name, Description = role.Description });
+    //    }
+    //    return RedirectToAction("Index");
+    //}
+
+    public ActionResult UserList() => View(_context.Users.ToList());
+
+    //[HttpPost]
+    //public async Task<ActionResult> Edit(EditRoleModel model)
+    //{
+    //    if (ModelState.IsValid)
+    //    {
+    //        ApplicationRole role = await RoleManager.FindByIdAsync(model.Id);
+    //        if (role != null)
+    //        {
+    //            role.Description = model.Description;
+    //            role.Name = model.Name;
+    //            IdentityResult result = await RoleManager.UpdateAsync(role);
+    //            if (result.Succeeded)
+    //            {
+    //                return RedirectToAction("Index");
+    //            }
+    //            else
+    //            {
+    //                ModelState.AddModelError("", "Что-то пошло не так");
+    //            }
+    //        }
+    //    }
+    //    return View(model);
+    //}
 
     public async Task<ActionResult> Delete(string id)
     {

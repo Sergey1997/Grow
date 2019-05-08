@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Web.Models.UserModels.User>
+
+<h2>Список пользователей</h2>
+<table class="table">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.Email</td>
+            <td>
+                @Html.ActionLink("Права доступа", "Edit", "Roles", new { userId = user.Id, }, null)
+            </td>
+        </tr>
+    }
+</table>

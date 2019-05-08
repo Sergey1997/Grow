@@ -9,7 +9,7 @@ using System.Web;
 
 namespace Web.Models.RoleModels
 {
-    class ApplicationRoleManager : RoleManager<ApplicationRole>
+    public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {
         public ApplicationRoleManager(RoleStore<ApplicationRole> store)
                     : base(store)

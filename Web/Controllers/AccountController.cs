@@ -21,7 +21,6 @@ namespace Web.Controllers
 
         public AccountController()
         {
-
         }
 
         public AccountController(ApplicationContext context)
@@ -54,7 +53,7 @@ namespace Web.Controllers
                 if (result.Succeeded)
                 {
                     // если создание прошло успешно, то добавляем роль пользователя
-                    await UserManager.AddToRoleAsync(user.Id, "user");
+                    await UserManager.AddToRoleAsync(user.Id, "Mentor");
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     return RedirectToAction("Index", "Home");

@@ -1,0 +1,21 @@
+﻿@model Web.Models.ViewModels.MaterialViewModel
+
+<h2>Добавление материалов</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div>
+    @Html.ValidationSummary(true, "")
+    <p>Name of material: @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })</p>
+    <p>Task in module:</p>
+    <div class="form-group">
+        @Html.DropDownList("TaskId", ViewBag.Tasks as SelectList, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <button class="btn btn-success" value="Добавить">
+        <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+        Добавить
+    </button>
+</div>
+}

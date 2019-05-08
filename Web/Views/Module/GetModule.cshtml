@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNet.Identity
+@model Web.Models.SkillModels.Skill
+
+@{
+    ViewBag.Title = "GetModule";
+}
+
+<h2>@Model.Name Module</h2>
+<div>
+    <div class="row">
+        <h3>Module agenda</h3>
+        <ul>
+            @foreach (var item in Model.Points)
+            {
+                <li>@item.Description</li>
+            }
+            @if (User.IsInRole("Mentor"))
+            {
+                @Html.ActionLink("Add agenda point", "AddPoint", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success" })
+            }
+        </ul>
+        <h3>Lections</h3>
+        <a href="#">@Model.Lections</a>
+        <h3>Tasks</h3>
+        @foreach (var item in Model.Tasks)
+        {
+            <h4>@item.Number.@item.Name</h4>
+            <div>@item.Description</div>
+            <h4>Note:</h4>
+            <div>@item.Note</div>
+            <h4>Materials:</h4>
+            foreach (var material in item.Materials)
+            {
+                <a href="#">@material.Name</a>
+            }
+            <br />
+            if (User.IsInRole("Mentor"))
+            {
+            @Html.ActionLink("Add Material", "AddMaterial", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success" })
+            }
+        }
+        @if (User.IsInRole("Mentor"))
+        {
+            @Html.ActionLink("Add new Task", "AddTask", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success" })
+        }
+    </div>
+</div>
+

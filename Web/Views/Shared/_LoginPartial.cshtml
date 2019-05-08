@@ -7,7 +7,17 @@
 
         <ul class="nav navbar-nav navbar-right">
             <li>
-                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "GetInfo", "Account", routeValues: null, htmlAttributes: new { title = "Account/GetInfo" })
+                @if (User.IsInRole("Mentor"))
+                {
+                    var role = "Mentor";
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!" + " You are " + role, "GetInfo", "Account", routeValues: null, htmlAttributes: new { title = "Account/GetInfo" })
+
+                }
+                else
+                {
+                    var role = "User";
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!" + " You are " + role, "GetInfo", "Account", routeValues: null, htmlAttributes: new { title = "Account/GetInfo" })
+                }
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

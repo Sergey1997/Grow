@@ -1,0 +1,21 @@
+﻿@model Web.Models.ViewModels.SkillViewModel
+
+<h2>Добавление умения</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div>
+    @Html.ValidationSummary(true, "")
+    <p>Название: @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })</p>
+    <p>Описание: @Html.TextAreaFor(model => model.Description, 5, 1, htmlAttributes: new { @class = "form-control" })</p>
+    <div class="form-group">
+        @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <button class="btn btn-success" value="Добавить">
+        <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+        Добавить
+    </button>
+</div>
+}

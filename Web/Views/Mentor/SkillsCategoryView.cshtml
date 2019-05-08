@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Web.Models.SkillModels.Skill>
+
+<table class="table">
+    <tr>
+        <th>
+            Name of module
+        </th>
+        <th>
+            Module Goal
+        </th>
+        <th>
+
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Go to module", "GetModule", "Module", new { skillId = item.SkillId }, null)
+
+            </td>
+        </tr>
+    }
+</table>
+
+
+

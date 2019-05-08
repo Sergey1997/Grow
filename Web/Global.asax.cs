@@ -13,6 +13,11 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.AspNet.Identity;
 using System.Data.Entity;
 using Web.Models.RoleModels;
+using Microsoft.Practices.Unity;
+using Web.Models.ViewModels;
+using Web.Models.SkillModels;
+using AutoMapper;
+using Web.Mappers;
 
 [assembly: OwinStartup(typeof(Web.MvcApplication))]
 namespace Web
@@ -21,11 +26,11 @@ namespace Web
     {
         protected void Application_Start()
         {
-
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfiguration.Configure();
         }
         public void Configuration(IAppBuilder app)
         {

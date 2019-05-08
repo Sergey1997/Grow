@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<Web.Models.SkillModels.CategoryOfSkill>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="col-sm-8 text-left">
+
+    @foreach (var category in Model)
+    {
+        @Html.Partial("CategoryView", category)
+    }
+    @if (User.IsInRole("Mentor"))
+    {
+        <p>
+            @Html.ActionLink("Create new category", "AddCategory", "Mentor", htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("Create new module", "AddSkill", "Mentor", htmlAttributes: new { @class = "btn btn-success" })
+        </p>
+    }
+</div>

@@ -11,6 +11,9 @@ namespace Web.Models
         public DbSet<Goal> Goals { get; set; }
         public DbSet<CategoryOfSkill> Categories { get; set; }
         public DbSet<Skill> Skills { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<ModulePoint> ModulePoints { get; set; }
+        public DbSet<Task> Tasks { get; set; }
         public ApplicationContext() : base("GrowDB") { }
 
         public static ApplicationContext Create()

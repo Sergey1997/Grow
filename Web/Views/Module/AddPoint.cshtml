@@ -1,0 +1,17 @@
+﻿@model Web.Models.ViewModels.CreateAgendaPointModelView
+
+<h2>Add agenda point</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "")
+        <p>Agenda point: @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })</p>
+        <button class="btn btn-success" value="Добавить">
+            <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+            Добавить
+        </button>
+    </div>
+}

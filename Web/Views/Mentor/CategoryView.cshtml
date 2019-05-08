@@ -1,0 +1,10 @@
+﻿@model Web.Models.SkillModels.CategoryOfSkill
+
+@{
+    ViewBag.CategoryId = Model.CategoryId;
+}
+
+<h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp @Html.DisplayFor(model => model.Name)</h4>
+    
+@Html.Partial("SkillsCategoryView", Model.Skills)
+
