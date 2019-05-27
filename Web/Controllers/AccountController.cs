@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using Web.Models;
 using Web.Models.GoalModels;
 using Web.Models.UserModels;
+using Web.Models.ViewModels;
 
 namespace Web.Controllers
 {
@@ -65,13 +66,15 @@ namespace Web.Controllers
         }
 
         [AllowAnonymous]
-        public IEnumerable<Goal> Index(string userEmail)
+        public ActionResult MyGoals()
         {
-            var user = _context.Users.First(u => u.Email == userEmail);
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var email = HttpContext.User.Identity.Name;
+            var user = UserManager.Users.Where(p => p.Email == email).SingleOrDefault();
 
             var goalsofUser = user.Goals.ToList();
 
-            return goalsofUser;
+            return View(goalsofUser);
         }
 
         public string GetInfo()
@@ -82,6 +85,35 @@ namespace Web.Controllers
             var dateOfCreating = UserManager.Users.Where(p => p.Email == email).Select(s => s.DateOfCreation);
             return "<p>Эл. адрес: " + email + "</p><p> Дата создания:" + user.DateOfCreation + "</p>";
         }
+        [HttpGet]
+        public ActionResult AddGoal()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddGoal(Goal viewModel)
+        {
+            var identity = (ClaimsPrincipal)Thread.CurrentPrincipal;
+            var email = HttpContext.User.Identity.Name;
+            var user = UserManager.Users.Where(p => p.Email == email).SingleOrDefault();
+            var goal = new Goal()
+            {
+                DeadlineDate = viewModel.DeadlineDate,
+                Description = viewModel.Description,
+                FinishDate = viewModel.FinishDate,
+                StartDate = viewModel.StartDate,
+                IsCompleted = viewModel.IsCompleted,
+                StatusOfGoal = viewModel.StatusOfGoal,
+                UserId = user.Id
+            };
+
+            _context.Goals.Add(goal);
+            _context.SaveChanges();
+
+            return RedirectToAction("MyGoals");
+        }
+        
         private IAuthenticationManager AuthenticationManager
         {
             get

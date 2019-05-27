@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Web.Models.GoalModels.Goal>
+@using System.ComponentModel.DataAnnotations;
+@{
+    ViewBag.Title = "MyGoals";
+}
+
+<h2>Мои цели</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "AddGoal")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Описание
+        </th>
+        <th>
+            Статус цели
+        </th>
+        <th>
+            Завершена?
+        </th>
+        <th>
+            Дата начала
+        </th>
+        <th>
+            Дата окончания
+        </th>
+        <th>
+            Дедлайн
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusOfGoal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCompleted)
+            </td>
+            <td>
+                @item.StartDate.ToShortDateString()
+            </td>
+            <td>
+                @item.FinishDate.ToShortDateString()
+            </td>
+            <td>
+                @item.DeadlineDate.ToShortDateString()
+            </td>
+            <td>
+                <img src="~/Content/images/close.png" style="margin-top:-3px" />
+            </td>
+        </tr>
+    }
+
+</table>
