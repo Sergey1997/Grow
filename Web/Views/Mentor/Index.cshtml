@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<div class="col-sm-8 text-left">
+<div class="col-sm-10 text-left">
 
     @foreach (var category in Model)
     {
@@ -13,8 +13,8 @@
     @if (User.IsInRole("Mentor"))
     {
         <p>
-            @Html.ActionLink("Create new category", "AddCategory", "Mentor", htmlAttributes: new { @class = "btn btn-success" })
-            @Html.ActionLink("Create new module", "AddSkill", "Mentor", htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("Create new category", "AddCategory", "Mentor", htmlAttributes: new { @class = "btn btn-success", @style = "background-color:#720D5D" })
+            @Html.ActionLink("Create new module", "AddSkill", "Mentor", htmlAttributes: new { @class = "btn btn-success", @style = "background-color:#720D5D" })
         </p>
     }
 </div>

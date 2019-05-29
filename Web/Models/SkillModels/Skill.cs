@@ -12,6 +12,7 @@ namespace Web.Models.SkillModels
         public string Name { get; set; }
         public string Description { get; set; }
         public string Lections { get; set; }
+        public byte[] Picture { get; set; }
         public int CategoryId { get; set; }
         public virtual CategoryOfSkill CategoryOfSkill { get; set; }
         public LevelOfSkill LevelOfSkill { get; set; } = LevelOfSkill.L1;

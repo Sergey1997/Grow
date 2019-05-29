@@ -230,6 +230,10 @@
     <Compile Include="Migrations\201905081812583_AddTasks.Designer.cs">
       <DependentUpon>201905081812583_AddTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905091941186_addPicture.cs" />
+    <Compile Include="Migrations\201905091941186_addPicture.Designer.cs">
+      <DependentUpon>201905091941186_addPicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationContext.cs" />
     <Compile Include="Models\GoalModels\Goal.cs" />
@@ -355,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905081812583_AddTasks.resx">
       <DependentUpon>201905081812583_AddTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905091941186_addPicture.resx">
+      <DependentUpon>201905091941186_addPicture.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
