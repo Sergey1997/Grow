@@ -13,11 +13,11 @@
         <fieldset>
             @Html.ValidationSummary(false)
             <!-- Form Name -->
-            <legend><center><h2><b>Log in</b></h2></center></legend><br>
+            <legend><center><h2><b>Авторизация</b></h2></center></legend><br>
 
             <!-- Text input-->
             <div class="form-group">
-                <label class="col-md-4 control-label">E-Mail</label>
+                <label class="col-md-4 control-label">Электронная почта</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -29,7 +29,7 @@
             <!-- Text input-->
 
             <div class="form-group">
-                <label class="col-md-4 control-label">Password</label>
+                <label class="col-md-4 control-label">Пароль</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -45,12 +45,12 @@
                 <div class="col-md-2">
                     <br>
                     <button class="btn btn-warning">
-                        @Html.ActionLink("Go back", "Index", "Home", htmlAttributes: new { @style = "color:white" })
+                        @Html.ActionLink("Вернуться", "Index", "Home", htmlAttributes: new { @style = "color:white" })
                     </button>
                 </div>
                 <div class="col-md-offset-6">
                     <br><button type="submit" class="btn btn-success" style="background-color:#720D5D">
-                        Log in
+                        Вход
                     </button>
                 </div>
             </div>
