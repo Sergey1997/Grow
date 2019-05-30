@@ -3,10 +3,10 @@
 <table class="table">
     <tr>
         <th>
-            Name of module
+            Название модуля
         </th>
         <th>
-            Module Goal
+            Цель модуля
         </th>
         <th>
 
@@ -22,7 +22,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Go to module", "GetModule", "Module", new { skillId = item.SkillId }, null)
+                @Html.ActionLink("Перейти в модуль", "GetModule", "Module", new { skillId = item.SkillId }, null)
 
             </td>
         </tr>

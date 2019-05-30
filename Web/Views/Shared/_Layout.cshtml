@@ -19,20 +19,20 @@
     /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
-      background-color: #f1f1f1;
+      background-color: #5D1049;
       height: 100%;
     }
 
     /* Set black background color, white text and some padding */
     footer {
-      background-color: #555;
+      background-color: #4E0D3A;
       color: white;
       padding: 15px;
     }
     </style>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#555">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:#4E0D3A">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -48,16 +48,18 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                <div style="padding-right:225px">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row content" style="height:1000px">
             <div class="col-sm-1 sidenav">
-                <p>@Html.ActionLink("C#", "Index", "Mentor", new { categoryId = 3 }, null)</p>
-                <p>@Html.ActionLink("Java", "Index", "Mentor", new { categoryId = 12 }, null)</p>
-                <p>@Html.ActionLink("SQL", "Index", "Mentor", new { categoryId = 13 }, null)</p>
+                <p>@Html.ActionLink("C#", "Index", "Mentor", new { categoryId = 3 }, new { @style = "color:white;" })</p>
+                <p>@Html.ActionLink("Java", "Index", "Mentor", new { categoryId = 12 }, new { @style = "color:white;" })</p>
+                <p>@Html.ActionLink("SQL", "Index", "Mentor", new { categoryId = 13 }, new { @style = "color:white;" })</p>
             </div>
             <div class="container body-content">
                 @RenderBody()

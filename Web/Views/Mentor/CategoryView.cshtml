@@ -4,7 +4,9 @@
     ViewBag.CategoryId = Model.CategoryId;
 }
 
-<h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp @Html.DisplayFor(model => model.Name)</h4>
-    
-@Html.Partial("SkillsCategoryView", Model.Skills)
+<div class="jumbotron" style="padding:15px 15px 15px 15px;margin:15px 0 15px 0">
+    <h4>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp @Html.DisplayFor(model => model.Name)</h4>
 
+    @Html.Partial("SkillsCategoryView", Model.Skills)
+</div>
+    

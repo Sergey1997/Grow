@@ -6,42 +6,54 @@
 }
 
 <h2>@Model.Name Module</h2>
+@if (Model.SkillId == 3)
+{
+    <img src="https://epam.sharepoint.com/sites/ASPNetCore/_layouts/15/getpreview.ashx?resolution=1&guidSite=c73f2e3da1c54dccae218049f0d69c46&guidWeb=16e580516818441d98004630bc44a519&guidFile=c8a1685868354051aecca7229dc26984&clientType=modernWebPart" style="width:30%; float: right;
+    position: relative;
+    bottom: -50px;"/>
+}
 <div>
     <div class="row">
-        <h3>Module agenda</h3>
-        <ul>
-            @foreach (var item in Model.Points)
-            {
-                <li>@item.Description</li>
-            }
-            @if (User.IsInRole("Mentor"))
-            {
-                @Html.ActionLink("Add agenda point", "AddPoint", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success" })
-            }
-        </ul>
-        <h3>Lections</h3>
+        <h3 style="text-align:center;margin-left:75px;">Темы для изучения</h3>
+        <div style="display: flex; justify-content: center;margin-left: 36px;">
+            <ul>
+                @foreach (var item in Model.Points)
+                {
+                    <li>@item.Description</li>
+                }
+                @if (User.IsInRole("Mentor"))
+                {
+                    @Html.ActionLink("Добавить тему", "AddPoint", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success", @style = "background-color:#720D5D" })
+                }
+            </ul>
+        </div>
+        <h3 style="font-weight:bold">Лекции</h3>
         <a href="#">@Model.Lections</a>
-        <h3>Tasks</h3>
+        <h3 style="font-weight:bold">Задания</h3>
         @foreach (var item in Model.Tasks)
-        {
-            <h4>@item.Number.@item.Name</h4>
+        {   
+            <h4 style="font-weight:bold">@item.Number. @item.Name</h4>
             <div>@item.Description</div>
-            <h4>Note:</h4>
+            <h4 style="font-weight:bold">Заметки:</h4>
             <div>@item.Note</div>
-            <h4>Materials:</h4>
+            <h4 style="font-weight:bold">Материалы:</h4>
             foreach (var material in item.Materials)
             {
-                <a href="#">@material.Name</a>
+                <a href="#">@material.Name</a><br />
             }
             <br />
-            if (User.IsInRole("Mentor"))
-            {
-            @Html.ActionLink("Add Material", "AddMaterial", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success" })
-            }
         }
         @if (User.IsInRole("Mentor"))
         {
-            @Html.ActionLink("Add new Task", "AddTask", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success" })
+            @Html.ActionLink("Добавить материал", "AddMaterial", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success", @style = "background-color:#720D5D" })
+        }
+        @if (User.IsInRole("Mentor"))
+        {
+            @Html.ActionLink("Добавить задание", "AddTask", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success", @style = "background-color:#720D5D" })
+        }
+        @if (User.IsInRole("User"))
+        {
+            @Html.ActionLink("Подписаться", "AddTask", "Module", new { skillId = Model.SkillId }, htmlAttributes: new { @class = "btn btn-success", @style = "background-color:#720D5D" })
         }
     </div>
 </div>

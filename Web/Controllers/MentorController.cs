@@ -17,8 +17,7 @@ namespace Web.Controllers
         public MentorController()
         {
         }
-
-        [Authorize(Roles = "Mentor")]
+        
         public ActionResult Index(int? categoryId)
         {
             if(categoryId != null)
